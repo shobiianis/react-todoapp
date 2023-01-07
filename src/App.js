@@ -1,24 +1,51 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+
+  const [prevState, nextState] = useState(1);
+  const [prevText, nexttext] = useState("Hello world")
+
+  let increase = () => {
+
+    nextState(prevState + 1);
+
+
+  }
+
+  let reset = () => {
+
+    nextState(0)
+
+  }
+
+  let nextText = () => {
+
+    nexttext(prevText + " " + "Shoaib Anis")
+  }
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <h1>{prevState}</h1>
+      <button onClick={increase}>Add+</button>
+      <button onClick={reset}>Reset</button>
+
+
+
+ 
+      <div>
+        <p>{prevText}</p>
+        <button onClick={nextText}>NextText</button>
+      </div>
+
+
     </div>
+
+
   );
 }
 
