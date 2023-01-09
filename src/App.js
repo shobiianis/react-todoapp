@@ -4,44 +4,54 @@ import { useState } from 'react';
 
 function App() {
 
-  const [prevState, nextState] = useState(1);
-  const [prevText, nexttext] = useState("Hello world")
+  const [activity, setActivity] = useState("");
+  const [listData, setListData] = useState([]);
 
-  let increase = () => {
 
-    nextState(prevState + 1);
+  let addActivity = () => {
+    setListData([...listData, activity]);
+    setActivity("")
+    console.log(listData)
+  }
 
+  let deleteTodo = (i) => {
+
+    // console.log(i)
+    let updatedList = listData.filter((item, index) => {
+
+      return i != index;
+
+
+    })
+
+    setListData(updatedList)
 
   }
 
-  let reset = () => {
 
-    nextState(0)
+  let editTodo = (i) => {
+
+    let edit = prompt("enter edit");
+
+    listData[i] = edit;
+
+    setListData([...listData]);
+    setActivity("")
+
 
   }
-
-  let nextText = () => {
-
-    nexttext(prevText + " " + "Shoaib Anis")
-  }
-
-
 
   return (
-    <div className="App">
 
-      <h1>{prevState}</h1>
-      <button onClick={increase}>Add+</button>
-      <button onClick={reset}>Reset</button>
+    <div className="AppApp">
+      <input placeholder='enter todo' value={activity} onChange={(e) => setActivity(e.target.value)} />
+      <button onClick={addActivity} >show</button>
 
-
-
- 
-      <div>
-        <p>{prevText}</p>
-        <button onClick={nextText}>NextText</button>
-      </div>
-
+      <ul>
+        {listData.map((item, i) => {
+          return <li key={i}> {item} <button onClick={() => deleteTodo(i)}>deleteTodo</button>  <button onClick={() => editTodo(i)}>edit</button> </li>
+        })}
+      </ul>
 
     </div>
 
